@@ -1,0 +1,25 @@
+
+<div class="p-5 flex justify-between items-center">
+    <div>
+        <h2 class="text-4xl text-white font-bold">INVENTORY</h2>
+    </div>
+    <div>
+        <button class="filter-btn px-5 font-semibold py-1 border-2 rounded border-slate-50" (click)="openFilter.emit()">Filters</button>
+
+        <button type="button" class="w-12 h-12 mx-1 px-2 py-1 hover:bg-indigo-900" (click)="layout = 'grid'">
+            <img src="assets/icons/grid.svg" alt="Grid">
+        </button>
+        <button type="button" class="w-12 h-12 mx-1 px-2 py-1 hover:bg-indigo-900" (click)="layout = 'list'">
+            <img src="assets/icons/list.svg" alt="List">
+        </button>
+    </div>
+</div>
+<div class="gap-6 p-5 overflow-y-auto" style="max-height: calc(100vh - 175px);" [ngClass]="{'gridView' : layout === 'grid', 'flex flex-col': layout === 'list' }"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="scrolledDown.emit()"
+    [scrollWindow]="false"
+    >
+    <ng-content></ng-content>
+</div>

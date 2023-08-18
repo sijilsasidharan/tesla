@@ -1,0 +1,15 @@
+:host {
+    @apply grid auto-rows-auto scroll-smooth overflow-y-auto h-full overscroll-y-contain snap-y snap-mandatory ;
+    .section-container {
+        @apply relative w-full min-h-screen bg-center bg-cover snap-start;
+        .title {
+            @apply text-black font-semibold text-4xl;
+            @apply absolute left-[50%] -translate-x-1/2 translate-y-60;
+        }
+        .sub-text {
+            @apply text-black font-medium text-sm;
+            @apply flex flex-col justify-center items-center;
+            @apply absolute left-[50%] -translate-x-1/2 translate-y-72;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+<aside class="flex flex-col gap-10 w-[400]">
+    <tesla-filter-container #searchContainer>
+        <tesla-search-filter [searchFilter$]="searchContainer.filter$"></tesla-search-filter>
+    </tesla-filter-container>
+    <tesla-filter-container #modelContainer>
+        <tesla-model-filter [modelFilter$]="modelContainer.filter$"></tesla-model-filter>
+    </tesla-filter-container>
+</aside>

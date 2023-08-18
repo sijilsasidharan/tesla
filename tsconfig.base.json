@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@data-models": ["libs/data-model/src/index.ts"],
+      "@tesla-client": ["apps/tesla-client/src/app"],
+      "@tesla-server": ["apps/tesla-server/src"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,3 @@
+<ng-container *ngFor="let paint of paints">
+    <tesla-paint-slot [color]="paint[0]" (activate)="setActive(paint)"></tesla-paint-slot>
+</ng-container>

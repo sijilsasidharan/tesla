@@ -1,1 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@angular/cdk/overlay-prebuilt.css';
+
+
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #242526;
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    scroll-behavior: smooth;
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f125;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+

@@ -1,0 +1,49 @@
+<div class="h-20 w-full px-10 flex justify-between items-center">
+  <img class="w-10 h-10 aspect-auto cursor-pointer" [routerLink]="['/']" [class.w-32]="isLandingPage" [src]="isLandingPage ? '/assets/images/logo.svg' : '/assets/images/logo.png'" alt="" />
+  <div class="flex justify-center items-center gap-5" *ngIf="(isSmallScreen$ | async) === false">
+    <a class="font-semibold" [ngClass]="{'text-white' : !isLandingPage, 'text-black': isLandingPage }" [routerLink]="['/model/model-3']">Model 3</a>
+    <a class="font-semibold" [ngClass]="{'text-white' : !isLandingPage, 'text-black': isLandingPage }" [routerLink]="['/model/model-y']">Model Y</a>
+    <a class="font-semibold" [ngClass]="{'text-white' : !isLandingPage, 'text-black': isLandingPage }" [routerLink]="['/model/model-s']">Model S</a>
+    <a class="font-semibold" [ngClass]="{'text-white' : !isLandingPage, 'text-black': isLandingPage }" [routerLink]="['/model/model-x']">Model X</a>
+  </div>
+  <div>
+      <button
+        class="px-5 py-0.5 text-white border-2 rounded border-white font-semibold"
+        [ngClass]="{'text-black border-black': isLandingPage, 'text-white border-white': !isLandingPage}"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
+        (click)="isMenuOpen = !isMenuOpen"
+      >
+        Menu
+      </button>
+  </div>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isMenuOpen"
+>
+  <div
+    class="fixed top-0 right-0 h-full w-72 px-10 py-15 flex flex-col gap-5 bg-white"
+  >
+    <div class="w-full flex flex-row-reverse">
+      <button
+        class="w-12 h-12 font-bold cursor-pointer text-lg -mr-10"
+        (click)="isMenuOpen = false"
+      >
+        X
+      </button>
+    </div>
+    <ng-container *ngIf="isSmallScreen$ | async">
+        <h2 class="font-bold cursor-pointer">Models</h2>
+        <ul class="ml-2 flex flex-col font-semibold gap-3 cursor-pointer">
+            <li [routerLink]="['/model/model-3']">Model 3</li>
+            <li [routerLink]="['/model/model-y']">Model Y</li>
+            <li [routerLink]="['/model/model-s']">Model S</li>
+            <li [routerLink]="['/model/model-x']">Model X</li>
+        </ul>
+    </ng-container>
+    <h2 class="font-bold cursor-pointer" [routerLink]="['/cars']">Inventory</h2>
+  </div>
+</ng-template>

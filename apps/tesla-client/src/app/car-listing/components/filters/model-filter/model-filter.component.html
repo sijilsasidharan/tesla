@@ -1,0 +1,13 @@
+<div  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Models</div>
+<div class="flex items-center mb-4">
+    <input id="default-radio" type="radio" [value]="null" [formControl]="modelControl" name="default-radio" class="radio-btn">
+    <label for="default-radio" class="radio-label">All</label>
+</div>
+<ng-container *ngFor="let model of models$ | async; let index = index">
+    <div class="flex items-center mb-4">
+        <input id="radio-{{ index }}" type="radio" [value]="model.id" [formControl]="modelControl" name="default-radio" class="radio-btn">
+        <label for="radio-{{ index }}" class="radio-label">{{ model.name }}</label>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="filter$ | async"></ng-container> 

@@ -1,0 +1,84 @@
+<ng-container *ngIf="model$ | async as model">
+  <article class="flex flex-col w-full h-full lg:flex-row max-lg:items-center">
+    <div class="flex w-full h-96 lg:h-auto lg:w-auto lg:grow">
+      <tesla-slider class="w-full h-full" [images]="images"></tesla-slider>
+    </div>
+    <div
+      class="full pt-20 h-screen flex flex-col justify-start items-center w-96 gap-20 lg:pr-10 max-lg:h-auto"
+    >
+      <h1>{{ model.name }}</h1>
+      <section class="grid grid-cols-3 gap-10">
+        <ng-container
+          *ngIf="
+            activeVariantId | activeVariant : model.variantData as activeVariant
+          "
+        >
+          <tesla-car-property
+            [property]="activeVariant.range"
+            measure="mi"
+            text="Range (EPA)"
+          ></tesla-car-property>
+          <tesla-car-property
+            [property]="activeVariant.top_speed"
+            measure="mph"
+            text="Top Speed"
+          ></tesla-car-property>
+          <tesla-car-property
+            [property]="activeVariant.acceleration"
+            measure="s"
+            text="0-60 mph"
+          ></tesla-car-property>
+        </ng-container>
+      </section>
+      <section class="w-full">
+        <ng-container
+          *ngIf="model.variantData | groupByMotor as groupByMotorData"
+        >
+          <ng-container
+            *ngFor="let groupedVariant of groupByMotorData | keyvalue"
+          >
+            <h3 class="mt-5 font-semibold">{{ groupedVariant.key }}</h3>
+            <ng-container *ngFor="let variant of groupedVariant.value">
+              <button
+                class="px-5 py-3 mb-3 w-full flex justify-between items-center gap-5 border-2 border-slate-500 rounded hover:border-white"
+                [class.active-variant]="variant.id === activeVariantId"
+                (click)="changeActiveVariant(variant)"
+              >
+                <span>{{ model.name }} {{ variant.name }}</span>
+                <span>{{ variant.price | currency }}</span>
+              </button>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </section>
+      <section class="w-full flex flex-col justify-center items-center gap-10">
+        <h2 class="text-bold text-4xl">Paint</h2>
+        <ng-container
+          *ngIf="
+            activeVariantId | activeVariant : model.variantData as activeVariant
+          "
+        >
+          <tesla-paint-picker
+            [paints]="activeVariant.color_and_images"
+            (paintChange)="changeImage($event)"
+          ></tesla-paint-picker>
+        </ng-container>
+      </section>
+      <section class="w-full relative flex justify-center items-center">
+        <div class="relative w-1/2 group">
+          <div
+            class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-200"
+          ></div>
+          <button
+            class="relative w-full px-7 py-4 bg-black rounded-lg leading-none flex items-center justify-center"
+          >
+            Customize
+          </button>
+        </div>
+        <!-- <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"> -->
+        <!-- </div> -->
+      </section>
+    </div>
+    <div></div>
+  </article>
+</ng-container>

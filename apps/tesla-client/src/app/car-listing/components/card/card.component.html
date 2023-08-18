@@ -1,0 +1,107 @@
+<article
+  class="card border-2 border-gray-500 rounded-lg shadow backdrop-blur-3xl w-full : hover:border-white relative"
+>
+  <ng-container
+    *ngTemplateOutlet="layout === 'grid' ? gridView : listView"
+  ></ng-container>
+</article>
+
+<ng-template #gridView>
+  <div class="flex flex-col p-5">
+    <div class="flex justify-between">
+      <h5 class="title">{{ carDetails.model?.name }}</h5>
+      <h5 class="title">{{ carDetails.price | currency }}</h5>
+    </div>
+    <h5 class="subtitle">{{ carDetails.name }}</h5>
+    <tesla-slider [images]="images"></tesla-slider>
+    <div class="mb-5 flex justify-between divide-x">
+      <div class="w-[33%]">
+        <ng-container
+          *ngTemplateOutlet="
+            carPropertirs;
+            context: {
+              property: carDetails.range,
+              measure: 'mi',
+              text: 'Range (EPA)'
+            }
+          "
+        ></ng-container>
+      </div>
+      <div class="flex justify-center content-end w-[33%]">
+        <ng-container
+          *ngTemplateOutlet="
+            carPropertirs;
+            context: {
+              property: carDetails.top_speed,
+              measure: 'mph',
+              text: 'Top Speed'
+            }
+          "
+        ></ng-container>
+      </div>
+      <div class="flex justify-center contend w-[33%]">
+        <ng-container
+          *ngTemplateOutlet="
+            carPropertirs;
+            context: {
+              property: carDetails.acceleration,
+              measure: 's',
+              text: '0-60 mph'
+            }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="viewDetails"></ng-container>
+    <!-- <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Details
+             <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </a> -->
+  </div>
+</ng-template>
+
+<ng-template #listView>
+  <div class="flex w-full justify-between items-center">
+    <section class="w-48 h-24">
+      <img
+        [src]="carDetails.color_and_images[0][1][0]"
+        [alt]="carDetails.model?.name"
+      />
+    </section>
+    <section class="grow flex flex-col justify-center items-start">
+      <h5 class="title">{{ carDetails.model?.name }}</h5>
+      <h5 class="subtitle">{{ carDetails.name }}</h5>
+    </section>
+    <section class="mr-10 w-72 flex flex-col justify-center items-end">
+      <h5 class="title">{{ carDetails.price | currency }}</h5>
+      <ng-container *ngTemplateOutlet="viewDetails"></ng-container>
+    </section>
+  </div>
+</ng-template>
+
+<ng-template
+  #carPropertirs
+  let-property="property"
+  let-measure="measure"
+  let-text="text"
+>
+  <div class="flex flex-col justify-center items-center">
+    <div class="flex justify-center items-end">
+      <h5 class="title">{{ property }}</h5>
+      <p class="small-text">{{ measure }}</p>
+    </div>
+    <p class="small-text">{{ text }}</p>
+  </div>
+</ng-template>
+
+<ng-template #viewDetails>
+  <button
+    href="#"
+    [routerLink]="['/model', carDetails.model?.id, carDetails.id, 'details']"
+    class="inline-flex justify-center items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg border-2 border-gray-500 hover:border-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+  >
+    View Details
+  </button>
+</ng-template>

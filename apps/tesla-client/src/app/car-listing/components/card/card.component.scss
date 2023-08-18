@@ -1,0 +1,16 @@
+:host {
+
+    h5 {
+        @apply font-bold tracking-tight ;
+        &.title {
+            @apply text-2xl text-gray-900 dark:text-white leading-7 h-7;
+        }
+        &.subtitle {
+            @apply text-base font-semibold text-gray-600 dark:text-gray-400 leading-4 h-4;
+        }
+    }
+
+    .small-text {
+        @apply text-gray-700 dark:text-gray-400 align-baseline;
+    }
+}

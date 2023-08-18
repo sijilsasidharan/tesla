@@ -1,0 +1,10 @@
+:host {
+    @apply text-white;
+    h1 {
+        @apply font-bold text-4xl
+    }
+
+    .active-variant {
+        @apply border-white;
+    }
+}

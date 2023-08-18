@@ -1,0 +1,10 @@
+<button
+  [style.background-color]="color"
+  [ngClass]="{
+    'ring-white': active,
+    'ring-slate-400': !active,
+    'ring-offset-4': active
+  }"
+  class="w-10 h-10 rounded-full cursor-pointer ring-2 ring-offset-slate-800"
+  (click)="activate.emit(color)"
+></button>

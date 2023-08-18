@@ -1,0 +1,58 @@
+<tesla-header [isLandingPage]="false"></tesla-header>
+<div class="flex gap-1">
+  <tesla-filters
+    *ngIf="isSmallScreen$ | async"
+    class="flex p-10 grow-0 shrink-0"
+    [style.width]="'250px'"
+    (addFilter)="setFilter($event)"
+  ></tesla-filters>
+  <tesla-cards-view-type
+    class="grow"
+    #cardType
+    (openFilter)="showFilter = true"
+    (scrolledDown)="nextPage()"
+  >
+  <ng-container *ngIf="carVariantList$ | async"></ng-container>
+    <tesla-card
+      *ngFor="let car of allVariants"
+      [carDetails]="car"
+      [layout]="cardType.layout"
+    >
+    </tesla-card>
+  </tesla-cards-view-type>
+</div>
+
+<div
+  class="h-screen w-full fixed lef-0 top-0 justify-center items-center bg-black bg-opacity-50 z-50"
+  *ngIf="showFilter"
+>
+  <div class="flex flex-row-reverse bg-blue-700">
+    <button
+      type="button"
+      class="w-12 h-12 mx-1 px-2 py-1 hover:bg-blue-400"
+      (click)="showFilter = false"
+    >
+      <img src="assets/icons/close.svg" alt="Grid" />
+    </button>
+  </div>
+  <tesla-filters
+    class="flex p-10 grow-0 shrink-0 bg-blue-700"
+    (addFilter)="saveFilters = $event"
+  ></tesla-filters>
+  <div class="flex bg-blue-700 pb-10 px-10">
+    <button
+      type="button"
+      class="w-1/2 h-12 mx-1 px-2 py-1 bg-blue-500 rounded-lg hover:bg-blue-400 text-white"
+      (click)="setFilter(saveFilters)"
+    >
+      Filter
+    </button>
+    <button
+      type="button"
+      class="w-1/2 h-12 mx-1 px-2 py-1 bg-blue-500 rounded-lg hover:bg-blue-400 text-white"
+      (click)="saveFilters = {}; showFilter = false"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
